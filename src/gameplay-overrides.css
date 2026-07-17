@@ -1,0 +1,7 @@
+.grounded-cat:nth-child(2){left:55%;top:38%}
+.battle-scene.clash .card-power{animation:power-pulse .55s ease}
+.battle-scene.clash .battle-table{position:relative}
+.battle-scene.clash .battle-table:after{content:"";position:absolute;left:35%;right:35%;top:37%;height:24%;border-radius:50%;background:radial-gradient(circle,#fff9 0 8%,#ffd85c88 10%,transparent 68%);pointer-events:none;animation:element-burst .75s ease forwards}
+@keyframes power-pulse{50%{transform:scale(1.45);filter:drop-shadow(0 0 6px #fff)}}
+@keyframes element-burst{from{transform:scale(.2);opacity:0}45%{opacity:1}to{transform:scale(2.2);opacity:0}}
+@media(prefers-reduced-motion:reduce){.battle-scene.clash .card-power,.battle-scene.clash .battle-table:after{animation:none}}

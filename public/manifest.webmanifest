@@ -1,11 +1,14 @@
 {
-  "name": "MeowVerse: Kosmická mise",
+  "name": "MeowVerse",
   "short_name": "MeowVerse",
-  "description": "Zachraň kočičí galaxii před chlupatým chaosem.",
+  "description": "Kočičí základna a férové elementární PvP.",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0c0a1b",
-  "theme_color": "#17142d",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#fff9e9",
+  "theme_color": "#7257c7",
   "orientation": "portrait",
   "icons": [
     { "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }

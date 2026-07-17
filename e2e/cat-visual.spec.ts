@@ -1,25 +1,47 @@
 import {test,expect} from "@playwright/test";
 import {mkdir} from "node:fs/promises";
 
-test.use({viewport:{width:393,height:852}});
-test("modulární kočky ve všech používaných kontextech",async({page})=>{
-  await mkdir("artifacts/cat-visual-review",{recursive:true});
-  await page.goto("/");
-  await expect(page.locator(".cat-avatar")).toHaveCount(2);
-  await page.screenshot({path:"artifacts/cat-visual-review/island.png"});
-  await page.getByRole("button",{name:/Aréna/}).click();
-  await expect(page.locator(".enemy .cat-avatar")).toBeVisible();
-  await expect(page.locator(".fighter .cat-avatar")).toBeVisible();
-  await page.screenshot({path:"artifacts/cat-visual-review/arena.png"});
-  await page.locator(".fighter-row").screenshot({path:"artifacts/cat-visual-review/cards.png"});
-  await page.screenshot({path:"artifacts/cat-visual-review/collection.png"});
-  await page.getByRole("button",{name:/Ostrov/}).click();
-  await page.getByRole("button",{name:/Rybník/}).click();
-  await page.getByRole("button",{name:/Posbírat/}).click();
-  await page.getByRole("button",{name:/Vylepšit/}).click();
-  await page.getByRole("button",{name:/Otevřít/}).click();
-  await expect(page.locator(".reveal .cat-avatar")).toBeVisible();
-  await page.screenshot({path:"artifacts/cat-visual-review/detail.png"});
-  const overflow=await page.evaluate(()=>[...document.querySelectorAll<HTMLElement>(".cat-avatar")].every(wrapper=>wrapper.scrollWidth<=wrapper.clientWidth&&wrapper.scrollHeight<=wrapper.clientHeight));
-  expect(overflow).toBe(true);
+const viewports=[{name:"390",width:390,height:844},{name:"393",width:393,height:852},{name:"430",width:430,height:932}];
+
+for(const viewport of viewports)test.describe(`review-${viewport.name}`,()=>{
+  test.use({viewport});
+  test("screenshoty gameplay toku",async({page})=>{
+    test.setTimeout(120_000);
+    const dir=`artifacts/gameplay-redesign/${viewport.name}`;
+    await mkdir(dir,{recursive:true});
+    await page.goto("/");
+    await page.screenshot({path:`${dir}/01-island.png`});
+    await page.locator('[data-building="pond"]').click();
+    await page.screenshot({path:`${dir}/02-pond-selected.png`});
+    await page.locator(".scene-shade").click({position:{x:2,y:2}});
+    await page.locator('[data-building="arena"]').click();
+    await page.getByRole("button",{name:"Hledat soupeře"}).click();
+    await page.getByRole("button",{name:"Hledat soupeře"}).click();
+    await page.screenshot({path:`${dir}/03-searching.png`});
+    await expect(page.locator(".versus-screen")).toBeVisible({timeout:5000});
+    await page.screenshot({path:`${dir}/04-versus.png`});
+    await expect(page.locator(".battle-scene.choose")).toBeVisible({timeout:5000});
+    await page.screenshot({path:`${dir}/05-round-start.png`});
+    await page.locator("[data-card]").first().click();
+    await page.screenshot({path:`${dir}/06-card-selected.png`});
+    await page.getByRole("button",{name:"Potvrdit"}).click();
+    await page.screenshot({path:`${dir}/07-cards-facedown.png`});
+    await expect(page.locator(".battle-scene.flip")).toBeVisible({timeout:5000});
+    await page.screenshot({path:`${dir}/08-flip.png`});
+    await expect(page.locator(".battle-scene.clash")).toBeVisible({timeout:5000});
+    await page.screenshot({path:`${dir}/09-element-result.png`});
+    let safety=0;
+    while(await page.locator(".match-result").count()===0&&safety++<9){
+      await expect(page.locator(".battle-scene.choose, .match-result").first()).toBeVisible({timeout:7000});
+      if(await page.locator(".match-result").count())break;
+      await page.locator("[data-card]").first().click();
+      await page.getByRole("button",{name:"Potvrdit"}).click();
+      await expect(page.locator(".battle-scene.clash")).toBeVisible({timeout:5000});
+      if(safety===1)await page.screenshot({path:`${dir}/10-same-element.png`});
+    }
+    await expect(page.locator(".match-result")).toBeVisible({timeout:5000});
+    await page.screenshot({path:`${dir}/11-match-result.png`});
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth&&[...document.querySelectorAll<HTMLElement>(".cat-avatar")].every(el=>el.scrollWidth<=el.clientWidth&&el.scrollHeight<=el.clientHeight));
+    expect(overflow).toBe(true);
+  });
 });

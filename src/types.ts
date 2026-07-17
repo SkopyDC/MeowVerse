@@ -13,6 +13,7 @@ export interface Cat {
 
 export interface OwnedCat { count: number; assignment: Assignment; }
 export interface Progress {
+  schemaVersion: number;
   fish: number;
   diamonds: number;
   medals: number;
@@ -23,6 +24,7 @@ export interface Progress {
   pendingCatId: string | null;
   wins: number;
   losses: number;
+  soundEnabled: boolean;
 }
 
 export interface BattleResult {

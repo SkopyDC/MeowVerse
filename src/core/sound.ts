@@ -1,0 +1,4 @@
+export type GameSound="select"|"place"|"flip"|"fire"|"water"|"nature"|"roundWin"|"matchWin";
+let context:AudioContext|null=null;
+export function unlockAudio(){try{context ||= new AudioContext();void context.resume()}catch{}}
+export function playSound(sound:GameSound,enabled=true){if(!enabled)return;unlockAudio();if(!context)return;const oscillator=context.createOscillator(),gain=context.createGain();const tones:Record<GameSound,number>={select:520,place:210,flip:680,fire:170,water:360,nature:440,roundWin:760,matchWin:920};oscillator.frequency.value=tones[sound];oscillator.type=sound==="fire"?"sawtooth":"sine";gain.gain.setValueAtTime(.06,context.currentTime);gain.gain.exponentialRampToValueAtTime(.001,context.currentTime+.16);oscillator.connect(gain).connect(context.destination);oscillator.start();oscillator.stop(context.currentTime+.17)}
