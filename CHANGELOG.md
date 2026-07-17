@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 – mobilní UX/UI stabilizace
+
+- Sjednocen AppShell, horní lišta, scrollovatelný obsah a spodní navigace.
+- Nahrazeny čtyři konfliktní CSS vrstvy jedním tokenizovaným design systémem.
+- Ostrov používá jediný informační panel a kontrolovanou ilustrační vrstvu.
+- Sbírka a editor balíčku jsou oddělené režimy; detail kočky je v modalu.
+- Pravděpodobnosti schránky jsou skryté pod vedlejší akcí.
+- Duel skrývá běžnou navigaci a používá samostatný bezpečný panel akce.
+- Přidány Playwright kontroly a screenshoty pro tři mobilní viewporty.
+
 ## 0.3.0 – prémiový vizuální vertical slice
 
 - Kompletně přepracována vizuální vrstva bez změny herních mechanik.
