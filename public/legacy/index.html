@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#17142d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="MeowVerse" />
+    <meta name="description" content="Zachraň kočičí galaxii před chlupatým chaosem." />
+    <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/legacy/styles.css" />
+    <title>MeowVerse</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hud" aria-label="Stav hry">
+        <div class="brand"><span>MEOW</span>VERSE</div>
+        <div class="hud-items">
+          <div><small>SKÓRE</small><strong id="score">0</strong></div>
+          <div><small>REKORD</small><strong id="best">0</strong></div>
+          <div><small>ŽIVOTY</small><strong id="lives" aria-label="3 životy">♥♥♥</strong></div>
+        </div>
+      </header>
+
+      <section id="game" class="game" aria-label="Herní plocha">
+        <div class="stars stars-a"></div>
+        <div class="stars stars-b"></div>
+        <div id="arena" class="arena"></div>
+
+        <section id="start-screen" class="panel visible">
+          <div class="planet-cat" aria-hidden="true">😺</div>
+          <p class="eyebrow">KOSMICKÁ MISE 01</p>
+          <h1>Zachraň<br /><em>MeowVerse</em></h1>
+          <p class="lead">Chytej hvězdné rybky. Vyhni se meteoritům a nenech žádnou dobrotu zmizet v prázdnotě.</p>
+          <button id="start-button" class="primary">Spustit misi <span>→</span></button>
+          <p class="hint">Pohybuj kočkou prstem nebo myší</p>
+        </section>
+
+        <section id="game-over" class="panel result" aria-live="polite">
+          <p class="eyebrow">MISE UKONČENA</p>
+          <h2>Galaxie čeká<br />na další pokus</h2>
+          <div class="final-score"><small>TVÉ SKÓRE</small><strong id="final-score">0</strong></div>
+          <p id="result-copy">Skvělý začátek, kapitáne!</p>
+          <button id="restart-button" class="primary">Hrát znovu <span>↻</span></button>
+        </section>
+
+        <div id="player" class="player" aria-label="Kosmická kočka">
+          <span class="ship-glow"></span>
+          <span class="cat">😸</span>
+          <span class="ship">◢</span>
+        </div>
+        <div id="controls" class="controls" aria-label="Ovládání">
+          <button id="move-left" type="button" aria-label="Pohyb doleva">◀</button>
+          <span>POHYB</span>
+          <button id="move-right" type="button" aria-label="Pohyb doprava">▶</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/legacy/game.js"></script>
+  </body>
+</html>

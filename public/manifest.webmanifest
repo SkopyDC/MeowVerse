@@ -1,0 +1,13 @@
+{
+  "name": "MeowVerse: Kosmická mise",
+  "short_name": "MeowVerse",
+  "description": "Zachraň kočičí galaxii před chlupatým chaosem.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0a1b",
+  "theme_color": "#17142d",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,160 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
+  background: #0c0a1b;
+  color: #fff;
+  touch-action: none;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; overflow: hidden; background: #0c0a1b; }
+button { font: inherit; }
+
+.app-shell {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: radial-gradient(circle at 50% -20%, #49376e 0, #17142d 44%, #090816 100%);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.hud {
+  height: 92px;
+  padding: 18px clamp(18px, 5vw, 34px) 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid #ffffff12;
+  backdrop-filter: blur(12px);
+}
+
+.brand { font-weight: 900; font-size: 14px; letter-spacing: .08em; transform: rotate(-2deg); }
+.brand span { color: #ffbc42; }
+.hud-items { display: flex; gap: clamp(14px, 5vw, 30px); text-align: center; }
+.hud-items div { display: grid; gap: 2px; }
+.hud small, .final-score small { color: #a49bbd; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+.hud strong { font-size: 18px; font-variant-numeric: tabular-nums; }
+#lives { color: #ff668a; letter-spacing: 2px; }
+
+.game { position: relative; overflow: hidden; min-height: 0; isolation: isolate; }
+.game::before {
+  content: "";
+  position: absolute;
+  width: 52vh;
+  height: 52vh;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #9b7bff, #4c2b88 50%, #241449 72%);
+  box-shadow: 0 0 80px #7651de55, inset -25px -20px 50px #130d3b99;
+  right: -28vh;
+  bottom: -18vh;
+}
+
+.stars, .stars::before, .stars::after { position: absolute; inset: 0; content: ""; pointer-events: none; }
+.stars { background-image: radial-gradient(#fff 1px, transparent 1.5px); background-size: 41px 41px; opacity: .35; }
+.stars-a { transform: rotate(7deg) scale(1.2); }
+.stars-b { background-size: 73px 73px; background-position: 20px 14px; opacity: .18; }
+.arena { position: absolute; inset: 0; }
+
+.panel {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 26px 48px;
+  background: linear-gradient(#12102b22, #12102b88);
+}
+.panel.visible { display: flex; animation: reveal .4s ease both; }
+.planet-cat { font-size: clamp(72px, 22vw, 110px); filter: drop-shadow(0 16px 18px #0008); animation: float 3s ease-in-out infinite; }
+.eyebrow { color: #ffbc42; font-size: 11px; font-weight: 900; letter-spacing: .22em; margin: 22px 0 10px; }
+h1, h2 { font-size: clamp(38px, 11vw, 64px); line-height: .94; letter-spacing: -.06em; margin: 0; text-transform: uppercase; text-shadow: 0 6px 20px #0008; }
+h1 em { color: #bd9bff; font-style: normal; }
+h2 { font-size: clamp(34px, 9vw, 54px); }
+.lead { max-width: 340px; color: #c4bdd7; line-height: 1.45; font-size: 14px; margin: 18px auto 22px; }
+.hint { color: #827b99; font-size: 11px; margin-top: 17px; }
+.primary {
+  width: min(310px, 85vw);
+  border: 0;
+  border-radius: 18px;
+  padding: 17px 20px;
+  color: #21162f;
+  background: linear-gradient(135deg, #ffd261, #ff9d5c);
+  box-shadow: 0 10px 30px #ff9d5c44, inset 0 1px #fff8;
+  font-weight: 900;
+  cursor: pointer;
+}
+.primary span { float: right; font-size: 20px; line-height: 16px; }
+.primary:active { transform: scale(.97); }
+.result { background: #100d25e8; backdrop-filter: blur(10px); }
+.final-score { display: grid; gap: 5px; margin: 28px 0 10px; }
+.final-score strong { font-size: 56px; color: #ffbc42; }
+.result > p:not(.eyebrow) { color: #bfb8d2; margin: 0 0 24px; }
+
+.player {
+  display: none;
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: clamp(25px, 7vh, 64px);
+  width: 76px;
+  height: 82px;
+  transform: translateX(-50%);
+  transition: left 70ms linear;
+  pointer-events: none;
+}
+.player.visible { display: block; }
+.cat { position: absolute; font-size: 46px; top: 0; left: 15px; z-index: 2; filter: drop-shadow(0 5px 6px #0006); }
+.ship { position: absolute; font-size: 72px; color: #8c6cff; transform: rotate(45deg); left: 6px; top: 17px; text-shadow: 0 0 12px #a991ff; }
+.ship-glow { position: absolute; width: 40px; height: 38px; left: 20px; bottom: -11px; background: linear-gradient(#72f5ff, transparent); filter: blur(8px); border-radius: 50%; animation: thrust .25s infinite alternate; }
+
+.falling { position: absolute; top: -70px; z-index: 3; font-size: 42px; width: 56px; height: 56px; display: grid; place-items: center; animation: fall linear forwards; filter: drop-shadow(0 6px 5px #0008); }
+.falling.gold { font-size: 46px; filter: drop-shadow(0 0 12px #ffd866); }
+.falling.meteor { font-size: 48px; }
+.controls {
+  display: none;
+  position: absolute;
+  z-index: 6;
+  left: 16px;
+  right: 16px;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.player.visible + .controls { display: flex; }
+.controls button {
+  pointer-events: auto;
+  width: 64px;
+  height: 48px;
+  border: 1px solid #ffffff2b;
+  border-radius: 16px;
+  color: #fff;
+  background: #241d46bb;
+  box-shadow: inset 0 1px #ffffff20;
+  cursor: pointer;
+}
+.controls button:active { background: #7651de; transform: scale(.96); }
+.controls span { color: #827b99; font-size: 9px; font-weight: 900; letter-spacing: .18em; }
+.game.hit { animation: damage .28s ease; }
+.game.collect::after { content: "+"; position: absolute; inset: 45% auto auto 50%; color: #ffdb74; font-size: 42px; font-weight: 900; animation: pop .45s ease both; }
+
+@keyframes fall { to { transform: translateY(calc(100svh + 100px)) rotate(250deg); } }
+@keyframes float { 50% { transform: translateY(-9px) rotate(2deg); } }
+@keyframes thrust { to { transform: scaleY(1.35); opacity: .55; } }
+@keyframes reveal { from { opacity: 0; transform: scale(1.03); } }
+@keyframes damage { 30% { filter: saturate(2); background: #ff315833; transform: translateX(-4px); } 60% { transform: translateX(4px); } }
+@keyframes pop { from { opacity: 1; transform: translate(-50%, 0) scale(.5); } to { opacity: 0; transform: translate(-50%, -70px) scale(1.4); } }
+
+@media (min-width: 700px) {
+  body { display: grid; place-items: center; background: #05040d; }
+  .app-shell { width: min(100vw, 480px); min-height: min(100svh, 900px); height: min(100svh, 900px); box-shadow: 0 0 80px #000; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planet-cat, .ship-glow { animation: none; }
+}
