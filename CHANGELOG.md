@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-07-17 – Fullscreen ostrov a dvě cesty k vítězství
+
+- Ostrov přepracován na souvislou fullscreen kočičí vesnici bez plovoucího oválu a stálých popisků.
+- Nový účet dostává šest unikátních startovních koček, dvě od každého živlu, a platnou výchozí sestavu.
+- PvP podporuje elementární i specializované vítězství, nejvýše devět kol a deterministický tiebreak.
+- Aréna ukazuje postup obou hráčů ikonami živlů a unikátních identit.
+- Běžná AI i pokročilý Sensei sledují veřejný postup nových vítězných cest.
+- Přidány testy startovního save, čisté vyhodnocovací logiky, AI a mobilního rozvržení.
+
 ## 0.4.0 – mobilní UX/UI stabilizace
 
 - Sjednocen AppShell, horní lišta, scrollovatelný obsah a spodní navigace.

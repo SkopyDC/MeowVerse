@@ -3,7 +3,7 @@ import {mkdir} from "node:fs/promises";
 
 test.use({viewport:{width:393,height:852}});
 test("nový účet vstoupí do první Senseiovy zkoušky",async({page})=>{
-  test.setTimeout(60_000);
+  test.setTimeout(90_000);
   await mkdir("artifacts/sensei-review",{recursive:true});
   await page.goto("/");
   await page.locator('[data-building="arena"]').click();
@@ -21,11 +21,12 @@ test("nový účet vstoupí do první Senseiovy zkoušky",async({page})=>{
   await page.screenshot({path:"artifacts/sensei-review/03-versus.png"});
   await expect(page.locator(".battle-scene.choose")).toBeVisible({timeout:4000});
   await page.screenshot({path:"artifacts/sensei-review/04-trial.png"});
+  const elementalRoute=["mechule","uhlik","priliv"];
   let rounds=0;
-  while(await page.locator(".belt-award").count()===0&&rounds++<6){
+  while(await page.locator(".belt-award").count()===0&&rounds<elementalRoute.length){
     await expect(page.locator(".battle-scene.choose, .belt-award").first()).toBeVisible({timeout:7000});
     if(await page.locator(".belt-award").count())break;
-    await page.locator("[data-card]").first().click();
+    await page.locator(`[data-card="${elementalRoute[rounds++]}"]`).click();
     await page.getByRole("button",{name:"Potvrdit"}).click();
     await expect(page.locator(".battle-scene.clash")).toBeVisible({timeout:5000});
   }

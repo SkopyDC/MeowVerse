@@ -1,5 +1,9 @@
 # MeowVerse – nový herní design
 
+> **Autoritativní pravidla aktuálního prototypu (17. 7. 2026):** Nový účet vždy začíná se šesti unikátními kočkami: dvěma Ohnivými, dvěma Vodními a dvěma Přírodními. Všechny jsou ve výchozí PvP sestavě. Zápas končí okamžitě buď výhrou alespoň jednou kočkou každého živlu, nebo třemi výhrami tří různých identit koček stejného živlu. Opakování stejného `catId` se počítá jen jednou. Po nejvýše devíti kolech rozhoduje počet různých vyhraných živlů, poté maximum unikátních vítězných koček jednoho živlu, poté počet vyhraných kol a nakonec remíza. Remíza kola nepřidává žádný postup.
+
+> Ostrov je fullscreen vesnice v perspektivě 3/4 shora. Rybník, aréna, centrum, cesty a budoucí parcely jsou součástí jednoho terénu bez viditelného geometrického okraje. Budovy se vybírají přímo ve scéně a jediná hlavní akce se zobrazí v bottom sheetu.
+
 ## Vize hry
 
 MeowVerse je dlouhodobá PvP hra o budování kočičí základny. Hráč většinu času tráví doma: plánuje výrobu, vylepšuje budovy, plní objednávky, připravuje bojové prostředky a rozvíjí svou kočičí posádku. Všechny tyto činnosti směřují k hlavnímu cíli — získat více strategických možností v soubojích proti ostatním hráčům.

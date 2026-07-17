@@ -21,6 +21,7 @@ export interface Progress {
   pondLevel: number;
   pondAt: number;
   collection: Record<string, OwnedCat>;
+  pvpTeam: string[];
   tutorialStep: number;
   pendingCatId: string | null;
   wins: number;
@@ -30,6 +31,19 @@ export interface Progress {
   defeatedSenseiTrials: string[];
   senseiAttempts: Record<string,number>;
   profileFrame: string;
+}
+
+export interface RoundWin {
+  round: number;
+  catId: string;
+  element: ElementType;
+}
+
+export type VictoryPath = "elemental" | "specialist" | "tiebreak" | "draw";
+export interface MatchVictory {
+  winner: "player" | "opponent" | "draw";
+  path: VictoryPath;
+  specialistElement?: ElementType;
 }
 
 export interface BattleResult {

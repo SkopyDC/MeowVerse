@@ -1,4 +1,5 @@
-import type {BeltId,Cat,ElementType,Progress} from "../types";
+import type {BeltId,Cat,ElementType,Progress,RoundWin} from "../types";
+import {chooseStrategicCat} from "./matchmaking";
 
 export const BELTS:{id:BeltId;name:string;color:string}[]=[
   {id:"white",name:"Bílý pásek",color:"#f7f3e8"},{id:"yellow",name:"Žlutý pásek",color:"#f2cf45"},{id:"orange",name:"Oranžový pásek",color:"#ed8b3a"},{id:"green",name:"Zelený pásek",color:"#55a765"},{id:"blue",name:"Modrý pásek",color:"#4c83cf"},{id:"purple",name:"Fialový pásek",color:"#8258ae"},{id:"brown",name:"Hnědý pásek",color:"#81563d"},{id:"black",name:"Černý pásek",color:"#24232b"}
@@ -14,7 +15,7 @@ export const SENSEI_CARDS:Cat[]=[
 ];
 export interface SenseiTrial{id:string;from:BeltId;to:BeltId;name:string;minWins:number;recommendedPower:number;requiredElements:number;ai:number;reward:{medals:number;diamonds:number;frame:string};deck:string[];quote:string}
 export const SENSEI_TRIALS:SenseiTrial[]=[
-  {id:"white-yellow",from:"white",to:"yellow",name:"Sensei Tlapka",minWins:0,recommendedPower:40,requiredElements:1,ai:1,reward:{medals:5,diamonds:2,frame:"frame-yellow"},deck:["student-paw","calm-drop","student-paw"],quote:"Ukaž, co ses naučil."},
+  {id:"white-yellow",from:"white",to:"yellow",name:"Sensei Tlapka",minWins:0,recommendedPower:40,requiredElements:1,ai:1,reward:{medals:5,diamonds:2,frame:"frame-yellow"},deck:["student-paw","calm-drop","flame-claw"],quote:"Ukaž, co ses naučil."},
   {id:"yellow-orange",from:"yellow",to:"orange",name:"Sensei Bambus",minWins:3,recommendedPower:46,requiredElements:2,ai:2,reward:{medals:8,diamonds:3,frame:"frame-orange"},deck:["bamboo-guard","calm-drop","flame-claw"],quote:"Síla bez rozvahy nestačí."},
   {id:"orange-green",from:"orange",to:"green",name:"Sensei Klid",minWins:7,recommendedPower:50,requiredElements:2,ai:3,reward:{medals:10,diamonds:3,frame:"frame-green"},deck:["calm-drop","bamboo-guard","flame-claw"],quote:"Poznej rytmus souboje."},
   {id:"green-blue",from:"green",to:"blue",name:"Sensei Živlů",minWins:12,recommendedPower:55,requiredElements:3,ai:4,reward:{medals:12,diamonds:4,frame:"frame-blue"},deck:["three-elements","bamboo-guard","flame-claw"],quote:"Tři živly. Jedno rozhodnutí."},
@@ -28,11 +29,11 @@ export function evaluateSenseiReadiness(progress:Progress,deck:Cat[],trial=curre
   if(!trial||!deck.length)return"Nepřipraven";const average=deck.reduce((sum,cat)=>sum+cat.power,0)/deck.length;const elements=new Set(deck.map(cat=>cat.element)).size;let score=0;if(average>=trial.recommendedPower)score+=2;else if(average>=trial.recommendedPower-8)score++;if(elements>=trial.requiredElements)score++;if(progress.wins>=trial.minWins)score++;if(deck.some(cat=>cat.passive))score++;return score<=1?"Nepřipraven":score===2?"Slabá šance":score<=4?"Připraven":"Výborně připraven";
 }
 function random(seed:number){let value=seed>>>0;return()=>((value=(value*1664525+1013904223)>>>0)/4294967296)}
-export interface SenseiPublicState{round:number;senseiScore:number;playerScore:number;playerUsed:ElementType[];senseiUsed:string[];playerDeployed:Cat}
+export interface SenseiPublicState{round:number;senseiScore:number;playerScore:number;playerUsed:ElementType[];senseiUsed:string[];playerDeployed:Cat;playerRoundWins?:RoundWin[];senseiRoundWins?:RoundWin[]}
 export class SenseiAI{
   private committed=new Map<number,Cat>();private rng:()=>number;
   constructor(private trial:SenseiTrial,seed=741){this.rng=random(seed)}
-  commit(state:SenseiPublicState){const existing=this.committed.get(state.round);if(existing)return existing;const available=this.trial.deck.map(id=>SENSEI_CARDS.find(cat=>cat.id===id)!).filter(cat=>cat&&!state.senseiUsed.includes(cat.id));const pool=available.length?available:this.trial.deck.map(id=>SENSEI_CARDS.find(cat=>cat.id===id)!);let choice=pool[Math.floor(this.rng()*pool.length)]!;if(this.trial.ai>=4&&state.playerUsed.length){const frequent=state.playerUsed.at(-1)!;const beats:Record<ElementType,ElementType>={Oheň:"Voda",Voda:"Příroda",Příroda:"Oheň"};choice=pool.find(cat=>cat.element===beats[frequent])||choice}this.committed.set(state.round,choice);return choice}
+  commit(state:SenseiPublicState){const existing=this.committed.get(state.round);if(existing)return existing;const all=this.trial.deck.map(id=>SENSEI_CARDS.find(cat=>cat.id===id)!).filter(Boolean);const available=all.filter(cat=>!state.senseiUsed.includes(cat.id));const pool=available.length?available:all;let choice=pool[Math.floor(this.rng()*pool.length)]!;if(this.trial.ai>=4)choice=chooseStrategicCat(pool,{ownWins:state.senseiRoundWins||[],opponentWins:state.playerRoundWins||[],usedIds:state.senseiUsed},this.rng());this.committed.set(state.round,choice);return choice}
 }
 export function awardSenseiVictory(progress:Progress,trial:SenseiTrial){if(progress.belt!==trial.from)return progress;const first=!progress.defeatedSenseiTrials.includes(trial.id);return {...progress,belt:trial.to,profileFrame:first?trial.reward.frame:progress.profileFrame,medals:progress.medals+(first?trial.reward.medals:1),diamonds:progress.diamonds+(first?trial.reward.diamonds:0),defeatedSenseiTrials:first?[...progress.defeatedSenseiTrials,trial.id]:progress.defeatedSenseiTrials}}
 export function recordSenseiAttempt(progress:Progress,trial:SenseiTrial){return {...progress,senseiAttempts:{...progress.senseiAttempts,[trial.id]:(progress.senseiAttempts[trial.id]||0)+1}}}
