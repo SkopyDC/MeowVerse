@@ -1,3 +1,1 @@
-.secondary{min-height:44px;border:1px solid #d6cbe9;border-radius:var(--r1);padding:var(--s2) var(--s3);background:#fff;color:var(--primary);font-weight:800}.cats-primary{position:sticky;z-index:var(--z-sticky);bottom:var(--s2);margin-top:var(--s4)}.detail-close{float:right;width:44px;border:0;border-radius:50%;background:var(--surface2);font-size:24px}.world-building.selected{filter:drop-shadow(0 0 10px #fff7a5) drop-shadow(0 8px 7px #3b584436)}
-.cat-art,.cat-art img{pointer-events:none}.modal .cat-art{height:120px}.modal .cat-art img{max-height:120px}.modal>div{position:relative}.modal .primary{position:relative;z-index:1}
-.island .world{min-height:calc(100dvh - var(--top) - var(--nav) - 92px)}
+/* Hlavní mobilní rozvržení je v ui.css. */
