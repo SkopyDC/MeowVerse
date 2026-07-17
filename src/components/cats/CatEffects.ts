@@ -1,0 +1,3 @@
+import type {CatAura} from "./types";
+const auras:Record<CatAura,string>={sparkles:'<path d="M48 72l4 10 10 4-10 4-4 10-4-10-10-4 10-4zm158 73l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>',fire:'<path d="M45 190q-14-25 9-43q-4 19 9 23q9-17 17-21q6 31-12 48z"/>',water:'<path d="M43 184q-2-20 17-34q19 15 15 34q-5 19-16 19t-16-19zm160-65q-1-13 11-22q13 10 10 22q-3 12-10 12t-11-12z"/>',leaves:'<path d="M45 167q20-18 31 4q-18 14-31-4zm151-64q19-19 31 2q-17 16-31-2z"/>',legendary:'<circle cx="128" cy="128" r="96" class="aura-ring"/>'};
+export function CatEffects(aura?:CatAura,shiny=false){return `<g class="cat-effects">${aura?auras[aura]:""}${shiny?auras.sparkles+'<path d="M48 210L207 44" class="shiny-glint"/>':""}</g>`;}

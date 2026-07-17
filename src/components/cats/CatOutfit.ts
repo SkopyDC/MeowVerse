@@ -1,0 +1,3 @@
+import type {CatOutfit as OutfitType} from "./types";
+const outfits:Record<OutfitType,string>={apron:'<path d="M103 155h50l9 68H94z" fill="#fff4df"/>',vest:'<path d="M89 164l28-14 11 25 12-25 27 14-9 54h-60z" fill="#6e8753"/>',cape:'<path d="M91 158q37 17 74 0l16 71H75z" fill="#7f4d9b"/>',armor:'<path d="M91 161q37-18 74 0l-8 55H99z" fill="#9497a6"/><path d="M104 174h48"/>',scarf:'<path d="M87 157q41 18 82 0l-4 20q-37 13-74 0zm65 14l18 52-17 1-15-48" fill="#ed6e5d"/>',coat:'<path d="M91 160q37-16 74 0l-7 61h-60z" fill="#537c94"/>'};
+export function CatOutfit(outfit?:OutfitType){return outfit?`<g class="cat-outfit">${outfits[outfit]}</g>`:"";}
