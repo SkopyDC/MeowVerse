@@ -13,6 +13,12 @@ export const CAT_VISUALS:Record<string,CatVisualConfig>={
   listka:{furPrimary:"#8fbd72",furSecondary:"#dff0af",eyeColor:"#456f3d",pattern:"spots",tail:"curled",hat:"straw",outfit:"vest",aura:"leaves"},
   uhlik:{furPrimary:p.dark.primary,furSecondary:p.dark.secondary,eyeColor:p.dark.eyes,pattern:"mask",ears:"folded",tail:"short",outfit:"armor",tool:"sword",aura:"fire"},
   priliv:{furPrimary:p.lake.primary,furSecondary:p.lake.secondary,eyeColor:p.lake.eyes,ears:"pointed",tail:"classic",outfit:"scarf",tool:"bag",aura:"water"},
-  mechule:{furPrimary:"#75a86b",furSecondary:"#d6e7a2",eyeColor:"#3f6339",pattern:"stripes",ears:"long",tail:"double",hat:"straw",aura:"leaves"}
+  mechule:{furPrimary:"#75a86b",furSecondary:"#d6e7a2",eyeColor:"#3f6339",pattern:"stripes",ears:"long",tail:"double",hat:"straw",aura:"leaves"},
+  "student-paw":{furPrimary:"#d9c29d",furSecondary:"#fff0c8",eyeColor:"#514377",ears:"classic",tail:"classic",outfit:"coat",aura:"leaves"},
+  "bamboo-guard":{furPrimary:"#668a5a",furSecondary:"#d8dfa2",eyeColor:"#303e31",pattern:"mask",ears:"folded",tail:"short",outfit:"armor",tool:"sword",aura:"leaves"},
+  "calm-drop":{furPrimary:"#9cced7",furSecondary:"#e7fbff",eyeColor:"#35598b",ears:"round",tail:"curled",outfit:"cape",aura:"water"},
+  "flame-claw":{furPrimary:"#a6473e",furSecondary:"#f0a057",eyeColor:"#ffd65f",pattern:"stripes",ears:"pointed",tail:"fluffy",outfit:"armor",aura:"fire"},
+  "three-elements":{furPrimary:"#eee4d0",furSecondary:"#8ac5ac",eyeColor:"#694b9a",ears:"long",tail:"double",outfit:"cape",aura:"legendary"},
+  "shadow-sensei":{furPrimary:"#302c40",furSecondary:"#77708a",eyeColor:"#f1b94b",pattern:"mask",ears:"folded",tail:"short",hat:"hood",outfit:"coat",aura:"sparkles"}
 };
 export const visualFor=(id:string)=>CAT_VISUALS[id]||CAT_VISUALS.bublina!;

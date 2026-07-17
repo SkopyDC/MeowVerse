@@ -3,7 +3,7 @@ import type {OwnedCat,Progress} from "../types";
 export const STORAGE_KEY="meowverse-progress-v3";
 export const SCHEMA_VERSION=3;
 export const defaultOwned=(assignment:OwnedCat["assignment"]=null):OwnedCat=>({count:1,assignment});
-export const freshProgress=():Progress=>({schemaVersion:SCHEMA_VERSION,fish:20,diamonds:0,medals:0,pondLevel:1,pondAt:Date.now()-300000,collection:{jiskra:defaultOwned("pvp"),kapka:defaultOwned("pond")},tutorialStep:0,pendingCatId:null,wins:0,losses:0,soundEnabled:true});
+export const freshProgress=():Progress=>({schemaVersion:SCHEMA_VERSION,fish:20,diamonds:0,medals:0,pondLevel:1,pondAt:Date.now()-300000,collection:{jiskra:defaultOwned("pvp"),kapka:defaultOwned("pond")},tutorialStep:0,pendingCatId:null,wins:0,losses:0,soundEnabled:true,belt:"white",defeatedSenseiTrials:[],senseiAttempts:{},profileFrame:"frame-white"});
 function storage(){try{return window.localStorage}catch{return null}}
 export function loadProgress(raw?:string|null):Progress{
   const source=raw===undefined?(()=>{try{return storage()?.getItem(STORAGE_KEY)||null}catch{return null}})():raw;

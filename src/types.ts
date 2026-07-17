@@ -1,6 +1,7 @@
 export type ElementType = "Oheň" | "Voda" | "Příroda";
 export type Profession = "Rybář" | "Farmář" | "Kuchař" | "Kurýr" | "Horník";
 export type Assignment = "pond" | "pvp" | null;
+export type BeltId = "white"|"yellow"|"orange"|"green"|"blue"|"purple"|"brown"|"black";
 
 export interface Cat {
   id: string;
@@ -25,6 +26,10 @@ export interface Progress {
   wins: number;
   losses: number;
   soundEnabled: boolean;
+  belt: BeltId;
+  defeatedSenseiTrials: string[];
+  senseiAttempts: Record<string,number>;
+  profileFrame: string;
 }
 
 export interface BattleResult {
