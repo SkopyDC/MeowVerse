@@ -16,5 +16,6 @@ export const GAME_CONFIG=Object.freeze({
   orderFishReward:15,
   orderXpReward:10,
   orderMedalReward:1,
-  orderDiamondChance:0.08
+  orderDiamondChance:0.08,
+  orderVanAwayMs:60000
 });

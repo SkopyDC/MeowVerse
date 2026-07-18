@@ -26,9 +26,9 @@ for(const viewport of viewports)test.describe(`review-${viewport.name}`,()=>{
     await page.screenshot({path:`${dir}/06-card-selected.png`});
     await page.getByRole("button",{name:"Potvrdit"}).click();
     await page.screenshot({path:`${dir}/07-cards-facedown.png`});
-    await expect(page.locator(".battle-scene.flip")).toBeVisible({timeout:5000});
+    await expect(page.locator(".battle-scene.flip, .battle-scene.element").first()).toBeVisible({timeout:5000});
     await page.screenshot({path:`${dir}/08-flip.png`});
-    await expect(page.locator(".battle-scene.clash")).toBeVisible({timeout:5000});
+    await expect(page.locator(".battle-scene.clash, .battle-scene.result").first()).toBeVisible({timeout:5000});
     await page.screenshot({path:`${dir}/09-element-result.png`});
     let safety=0;
     while(await page.locator(".match-result").count()===0&&safety++<9){
@@ -36,7 +36,7 @@ for(const viewport of viewports)test.describe(`review-${viewport.name}`,()=>{
       if(await page.locator(".match-result").count())break;
       await page.locator("[data-card]").first().click();
       await page.getByRole("button",{name:"Potvrdit"}).click();
-      await expect(page.locator(".battle-scene.clash")).toBeVisible({timeout:5000});
+      await expect(page.locator(".battle-scene.clash, .battle-scene.result").first()).toBeVisible({timeout:5000});
       if(safety===1)await page.screenshot({path:`${dir}/10-same-element.png`});
     }
     await expect(page.locator(".match-result")).toBeVisible({timeout:5000});

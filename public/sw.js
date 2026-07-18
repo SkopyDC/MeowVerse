@@ -1,4 +1,4 @@
-const CACHE = "meowverse-v10";
+const CACHE = "meowverse-v11";
 const ASSETS = ["/", "/index.html", "/manifest.webmanifest", "/assets/icon.svg", "/assets/backgrounds/island-premium.png", "/legacy/", "/legacy/styles.css", "/legacy/game.js", "/legacy/engine.js"];
 
 self.addEventListener("install", (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS))));

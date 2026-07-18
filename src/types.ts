@@ -33,6 +33,7 @@ export interface Progress {
   snacks: number;
   crafting: {recipe:string;readyAt:number}|null;
   orderIndex: number;
+  orderVanReturnAt: number;
   playerLevel: number;
   playerXp: number;
   tutorialStep: number;
