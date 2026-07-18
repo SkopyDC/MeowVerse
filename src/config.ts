@@ -5,5 +5,16 @@ export const GAME_CONFIG=Object.freeze({
   packCost:50,
   pvpPackMedals:10,
   winFish:8,
-  winMedals:2
+  winMedals:2,
+  deckSize:20,
+  openingHandSize:5,
+  dairyTickMs:20000,
+  dairyCapacity:20,
+  orderMilk:3,
+  orderFish:2,
+  orderCheese:1,
+  orderFishReward:15,
+  orderXpReward:10,
+  orderMedalReward:1,
+  orderDiamondChance:0.08
 });

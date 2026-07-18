@@ -19,6 +19,6 @@ export const CAT_VISUALS:Record<string,CatVisualConfig>={
   "calm-drop":{furPrimary:"#9cced7",furSecondary:"#e7fbff",eyeColor:"#35598b",ears:"round",tail:"curled",outfit:"cape",aura:"water"},
   "flame-claw":{furPrimary:"#a6473e",furSecondary:"#f0a057",eyeColor:"#ffd65f",pattern:"stripes",ears:"pointed",tail:"fluffy",outfit:"armor",aura:"fire"},
   "three-elements":{furPrimary:"#eee4d0",furSecondary:"#8ac5ac",eyeColor:"#694b9a",ears:"long",tail:"double",outfit:"cape",aura:"legendary"},
-  "shadow-sensei":{furPrimary:"#302c40",furSecondary:"#77708a",eyeColor:"#f1b94b",pattern:"mask",ears:"folded",tail:"short",hat:"hood",outfit:"coat",aura:"sparkles"}
+  "shadow-sensei":{furPrimary:"#68646d",furSecondary:"#c6c1b8",eyeColor:"#5b4a31",pattern:"mask",ears:"folded",tail:"short",outfit:"coat",sensei:true}
 };
 export const visualFor=(id:string)=>CAT_VISUALS[id]||CAT_VISUALS.bublina!;

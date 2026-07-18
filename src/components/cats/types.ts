@@ -6,4 +6,4 @@ export type CatHat="crown"|"cap"|"straw"|"chef"|"fisher"|"helmet"|"hood"|"horns"
 export type CatOutfit="apron"|"vest"|"cape"|"armor"|"scarf"|"coat";
 export type CatTool="rod"|"pitchfork"|"spoon"|"hammer"|"sword"|"lantern"|"parcel"|"bag";
 export type CatAura="sparkles"|"fire"|"water"|"leaves"|"legendary";
-export interface CatVisualConfig{furPrimary:string;furSecondary?:string;pattern?:CatPattern;eyeColor:string;ears?:CatEars;tail?:CatTail;hat?:CatHat;outfit?:CatOutfit;tool?:CatTool;aura?:CatAura;shiny?:boolean;}
+export interface CatVisualConfig{furPrimary:string;furSecondary?:string;pattern?:CatPattern;eyeColor:string;ears?:CatEars;tail?:CatTail;hat?:CatHat;outfit?:CatOutfit;tool?:CatTool;aura?:CatAura;shiny?:boolean;sensei?:boolean;}

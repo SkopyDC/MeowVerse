@@ -1,6 +1,7 @@
 export type ElementType = "Oheň" | "Voda" | "Příroda";
 export type Profession = "Rybář" | "Farmář" | "Kuchař" | "Kurýr" | "Horník";
-export type Assignment = "pond" | "pvp" | null;
+export type Assignment = "pond" | "dairy" | "craft" | "pvp" | null;
+export type HungerState = "full" | "hungry" | "starving";
 export type BeltId = "white"|"yellow"|"orange"|"green"|"blue"|"purple"|"brown"|"black";
 
 export interface Cat {
@@ -12,7 +13,7 @@ export interface Cat {
   passive: string;
 }
 
-export interface OwnedCat { count: number; assignment: Assignment; }
+export interface OwnedCat { count: number; assignment: Assignment; hunger: HungerState; fedAt:number; }
 export interface Progress {
   schemaVersion: number;
   fish: number;
@@ -22,6 +23,18 @@ export interface Progress {
   pondAt: number;
   collection: Record<string, OwnedCat>;
   pvpTeam: string[];
+  battleDeck: string[];
+  deployedCatId: string;
+  milk: number;
+  dairyLevel: number;
+  dairyAt: number;
+  cheese: number;
+  sandwiches: number;
+  snacks: number;
+  crafting: {recipe:string;readyAt:number}|null;
+  orderIndex: number;
+  playerLevel: number;
+  playerXp: number;
   tutorialStep: number;
   pendingCatId: string | null;
   wins: number;

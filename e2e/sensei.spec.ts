@@ -7,7 +7,7 @@ test("nový účet vstoupí do první Senseiovy zkoušky",async({page})=>{
   await mkdir("artifacts/sensei-review",{recursive:true});
   await page.goto("/");
   await page.locator('[data-building="arena"]').click();
-  await page.getByRole("button",{name:"Hledat soupeře"}).click();
+  await page.getByRole("button",{name:"Připravit PvP"}).click();
   await expect(page.getByRole("button",{name:/Vyzvat Senseie/})).toBeVisible();
   await page.getByRole("button",{name:/Vyzvat Senseie/}).click();
   await expect(page.getByRole("heading",{name:"Sensei Tlapka"})).toBeVisible();
