@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
     "check": "tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "node tools/v3-e2e.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -18,5 +18,8 @@
     "typescript": "^7.0.2",
     "vite": "^8.1.5",
     "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
   }
 }

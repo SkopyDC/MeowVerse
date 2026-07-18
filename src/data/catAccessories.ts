@@ -1,1 +1,0 @@
-export const CAT_ACCESSORIES={fisher:{hat:"fisher",tool:"rod"},farmer:{hat:"straw",outfit:"vest",tool:"pitchfork"},chef:{hat:"chef",outfit:"apron",tool:"spoon"},courier:{outfit:"scarf",tool:"bag"},guard:{outfit:"armor",tool:"sword"},fairy:{hat:"cap",aura:"water"},king:{hat:"crown",outfit:"cape",aura:"legendary"}} as const;

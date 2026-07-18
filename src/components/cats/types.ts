@@ -1,9 +1,0 @@
-export type CatSize="mini"|"card"|"island"|"detail";
-export type CatPattern="none"|"stripes"|"spots"|"mask";
-export type CatEars="classic"|"round"|"pointed"|"folded"|"long";
-export type CatTail="classic"|"fluffy"|"short"|"curled"|"double";
-export type CatHat="crown"|"cap"|"straw"|"chef"|"fisher"|"helmet"|"hood"|"horns";
-export type CatOutfit="apron"|"vest"|"cape"|"armor"|"scarf"|"coat";
-export type CatTool="rod"|"pitchfork"|"spoon"|"hammer"|"sword"|"lantern"|"parcel"|"bag";
-export type CatAura="sparkles"|"fire"|"water"|"leaves"|"legendary";
-export interface CatVisualConfig{furPrimary:string;furSecondary?:string;pattern?:CatPattern;eyeColor:string;ears?:CatEars;tail?:CatTail;hat?:CatHat;outfit?:CatOutfit;tool?:CatTool;aura?:CatAura;shiny?:boolean;sensei?:boolean;}
