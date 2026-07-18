@@ -67,3 +67,16 @@ Horní shell používá `env(safe-area-inset-top)`, spodní navigace `env(safe-a
 ## Assety
 
 Všechny obrázky se načítají přes `src/data/assetManifest.ts`. Klíčové assety se preloadují před zobrazením aplikace. SVG jsou připravená na libovolné DPI; budoucí rastrové náhrady použijí WebP/PNG ve 2× rozlišení.
+# Pětisekundový test ostrova
+
+Ostrov musí bez vysvětlování během prvních pěti sekund sdělit tři věci: aréna je hlavní cesta do PvP, balíčkový dům je druhý hlavní cíl a rybník, mlékárna, dílna a auto jsou výrobní zázemí. Hráč má poznat klikatelné budovy podle objemu, stínu, animace a ukazatele – ne podle plovoucího panelu.
+
+Kontrolní otázky pro každý screenshot:
+
+- Je první pohled na arénu a druhý na balíčkový dům?
+- Jsou budovy čitelné i bez indikátorů a bez textových popisků?
+- Je mezi objekty dost klidného terénu a žádný ukazatel nekoliduje s HUD?
+- Reaguje přímo zobrazená budova, nikoli neviditelná plocha mimo ni?
+- Zůstávají kočky, dekorace a foreground podpůrné, nikoli dominantní?
+
+Kompozice používá jediný scene graph 1000 × 1600. Souřadnice, pořadí vrstev, hit area i kotvy indikátorů jsou definované v `src/data/islandScene.ts`; CSS neurčuje polohu jednotlivých budov.

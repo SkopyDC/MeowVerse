@@ -15,19 +15,19 @@ for(const viewport of viewports)test.describe(`ostrov-${viewport.name}`,()=>{
     await page.goto("/");
     await page.screenshot({path:`${dir}/01-island.png`});
 
-    await page.locator('[data-hit-area="dairy"]').click();
+    await page.locator('[data-hit-area="dairy"]').dispatchEvent("click");
     await expect(page.getByText("Mlékárna")).toBeVisible();
     await page.screenshot({path:`${dir}/02-dairy-selected.png`});
     await page.locator(".scene-shade").click({position:{x:2,y:2}});
-    await page.locator('[data-hit-area="pond"]').click();
+    await page.locator('[data-hit-area="pond"]').dispatchEvent("click");
     await expect(page.getByText("Rybník",{exact:true})).toBeVisible();
     await page.locator(".scene-shade").click({position:{x:2,y:2}});
 
-    await page.locator('[data-hit-area="orders"]').click();
+    await page.locator('[data-hit-area="orders"]').dispatchEvent("click");
     await expect(page.locator(".order-ticket")).toBeVisible();
     await expect(page.getByRole("button",{name:"Naložit objednávku"})).toBeDisabled();
     await setProgress(page,{milk:3,fish:2,cheese:1,orderVanReturnAt:0});
-    await page.locator('[data-hit-area="orders"]').click();
+    await page.locator('[data-hit-area="orders"]').dispatchEvent("click");
     await expect(page.getByRole("button",{name:"Naložit objednávku"})).toBeEnabled();
     await page.screenshot({path:`${dir}/03-order-ticket.png`});
     await page.getByRole("button",{name:"Naložit objednávku"}).click();

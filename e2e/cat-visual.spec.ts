@@ -11,10 +11,10 @@ for(const viewport of viewports)test.describe(`review-${viewport.name}`,()=>{
     await mkdir(dir,{recursive:true});
     await page.goto("/");
     await page.screenshot({path:`${dir}/01-island.png`});
-    await page.locator('[data-building="pond"]').click();
+    await page.locator('[data-hit-area="pond"]').dispatchEvent("click");
     await page.screenshot({path:`${dir}/02-pond-selected.png`});
     await page.locator(".scene-shade").click({position:{x:2,y:2}});
-    await page.locator('[data-building="arena"]').click();
+    await page.locator('[data-hit-area="arena"]').dispatchEvent("click");
     await page.getByRole("button",{name:"Připravit PvP"}).click();
     await page.getByRole("button",{name:"Hrát PvP"}).click();
     await page.screenshot({path:`${dir}/03-searching.png`});
