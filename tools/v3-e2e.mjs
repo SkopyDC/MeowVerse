@@ -16,6 +16,11 @@ try{
     const page=await context.newPage();
     await page.goto(baseUrl,{waitUntil:"domcontentloaded"});
     await page.waitForSelector("canvas");
+    await page.waitForFunction(()=>{
+      const game=window.__MEOWVERSE_GAME__;
+      const scene=game?.scene?.getScene?.("IslandScene");
+      return Boolean(scene?.scene?.isActive?.()&&scene.children?.getByName?.("pond"));
+    });
     assert(await page.locator(".v3-nav button").count()===4,`${viewport.name}: navigation count`);
     await mkdir(`artifacts/rebuild-v3/${viewport.name}`,{recursive:true});
     if(!remoteBase)await page.screenshot({path:`artifacts/rebuild-v3/${viewport.name}/01-island.png`});
